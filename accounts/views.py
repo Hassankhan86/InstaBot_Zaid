@@ -425,14 +425,22 @@ def instabotcode(request):
 
 
 # <=-------------------=>
+                print('Profile Click')
                 try:
                     time.sleep(random.randint(3, 5))
+                    # profile = wait.until(EC.element_to_be_clickable((By.XPATH,
+                    #                                              '/html/body/div[1]/section/main/div/div[1]/article/header/div[2]/div[1]/div[1]/span/a'))).click()
                     profile = wait.until(EC.element_to_be_clickable((By.XPATH,
-                                                                 '/html/body/div[1]/section/main/div/div[1]/article/header/div[2]/div[1]/div[1]/span/a'))).click()
-                # if profile.is_displayed():
+                                                                     '/html/body/div[1]/section/main/div/div[1]/article/div/div[2]/div/div[1]/div/header/div[2]/div[1]/div[1]'))).click()
+
+                    # if profile.is_displayed():
                 # profile.click()
+                    print('Profile Click')
+
                     time.sleep(random.randint(2, 3))
                 except:
+                    print('Profile Click------------')
+
                     continue
 # <=-------------------=>
 
@@ -480,13 +488,13 @@ def instabotcode(request):
 
 
             try:
+                sleep(3)
                 LogOutBtn = wait.until(EC.element_to_be_clickable(
                     (By.XPATH, '/html/body/div[1]/section/nav/div[2]/div/div/div[3]/div/div[5]/span/img'))).click()
                 time.sleep(random.randint(1, 2))
                 # time.sleep(3)
                 Logout = wait.until(EC.element_to_be_clickable((By.XPATH,
                                                                 '/html/body/div[1]/section/nav/div[2]/div/div/div[3]/div/div[5]/div[2]/div[2]/div[2]/div[2]/div/div/div/div/div/div'))).click()
-
                 time.sleep(random.randint(1, 2))
                 # sleep(2)
                 driver.quit()
@@ -592,7 +600,7 @@ def comment_func(wait, driver, comment_report):
     for com in Comments.objects.all():
         com_list.append(com.title)
         print(com_list)
-
+    print('-----------------------------------CCC')
     # try:
     #     sleep(5)
     #     Post = WebDriverWait(driver, 5).until(
@@ -601,6 +609,7 @@ def comment_func(wait, driver, comment_report):
     # except:
     comm_rep = comment_report
     print(comm_rep)
+    print('-----------------------------------CCC')
     # sleep(5)
 
     before_comment = len(driver.find_elements_by_class_name('Mr508'))
@@ -610,16 +619,25 @@ def comment_func(wait, driver, comment_report):
     # sleep(3)
     comment = WebDriverWait(driver, 5).until(EC.visibility_of_element_located(
         (By.XPATH, '//*[@aria-label="Add a comment…"]')))
+    print('-----------------------------------CCC')
     if comment.is_displayed():
         comment.click()
+        print('-----------------------------------CCC')
         # comment.send_keys(random.choice(com_list))
         # sleep(2)
         time.sleep(random.randint(1, 2))
-    msg = WebDriverWait(driver, 2).until(EC.element_to_be_clickable(
+        print('-----------------------------------CCC3')
+
+    # msg = WebDriverWait(driver, 3).until(EC.element_to_be_clickable(
+    #     (By.XPATH,
+    #      '/html/body/div[1]/section/main/div/div[1]/article/div[3]/section[3]/div/form/textarea'))).send_keys(
+    #     random.choice(com_list))
+    msg = WebDriverWait(driver, 3).until(EC.element_to_be_clickable(
         (By.XPATH,
-         '/html/body/div[1]/section/main/div/div[1]/article/div[3]/section[3]/div/form/textarea'))).send_keys(
-        random.choice(com_list))
+         '/html/body/div[1]/section/main/div/div[1]/article/div/div[2]/div/div[2]/section[3]/div/form/textarea'))).send_keys('NYce')
     time.sleep(random.randint(1, 2))
+
+    print('-----------------------------------CCC')
     # sleep(2)
 
     Post = WebDriverWait(driver, 2).until(
@@ -629,11 +647,11 @@ def comment_func(wait, driver, comment_report):
     # pp = WebDriverWait(driver, 2).until(
     #         EC.element_to_be_clickable(By.XPATH, '//button[contains(text(),"Post")]'))).getText();
     sleep(10)
-
+    print('-----------------------------------CCC')
     # After_comment = len(wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'Mr508'))))
     After_comment = len(driver.find_elements_by_class_name('Mr508'))
     print(After_comment)
-
+    print('-----------------------------------CCC')
     if After_comment > before_comment:
         # comment_report -=1
         print("Comment SuccessFully")
@@ -642,6 +660,7 @@ def comment_func(wait, driver, comment_report):
         print("Comment After and Before")
 
     return comm_rep
+    print('-----------------------------------CCC')
     # print('Comment Successfully')
     # sleep(5)
 
