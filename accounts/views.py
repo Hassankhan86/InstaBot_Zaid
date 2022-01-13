@@ -170,7 +170,7 @@ def errormessage(request):
 @login_required(login_url='/accounts/login')
 def instabotcode(request):
     # if request.method == 'POST':
-    try:
+    # try:
         print('sss')
 
         like = request.POST.get('liked')
@@ -249,7 +249,6 @@ def instabotcode(request):
             options.add_argument('--disable-blink-features=AutomationControlled')
 
             # options = webdriver.ChromeOptions()
-
             # chromepath = "chromedriver.exe"  # Headless
             # driver = webdriver.Chrome(options=options)
 
@@ -259,12 +258,12 @@ def instabotcode(request):
             # driver = webdriver.Chrome(executable_path=chromepath,)
             driver.minimize_window()
 
-            driver.get("chrome://settings/clearBrowserData")
-            sleep(3)
-            clearButton = driver.execute_script(
-                "return document.querySelector('settings-ui').shadowRoot.querySelector('settings-main').shadowRoot.querySelector('settings-basic-page').shadowRoot.querySelector('settings-section > settings-privacy-page').shadowRoot.querySelector('settings-clear-browsing-data-dialog').shadowRoot.querySelector('#clearBrowsingDataDialog').querySelector('#clearBrowsingDataConfirm')")
+            # driver.get("chrome://settings/clearBrowserData")
+            # sleep(3)
+            # clearButton = driver.execute_script(
+            #     "return document.querySelector('settings-ui').shadowRoot.querySelector('settings-main').shadowRoot.querySelector('settings-basic-page').shadowRoot.querySelector('settings-section > settings-privacy-page').shadowRoot.querySelector('settings-clear-browsing-data-dialog').shadowRoot.querySelector('#clearBrowsingDataDialog').querySelector('#clearBrowsingDataConfirm')")
             # click on the clear button now
-            clearButton.click()
+            # clearButton.click()
             # actions = ActionChains(driver)
             # actions.send_keys(Keys.TAB * 7 + Keys.ENTER)
             # actions.perform()
@@ -378,6 +377,39 @@ def instabotcode(request):
                 # sleep(0)
 
 # <=-------------------=>
+                sleep(5)
+                # print("FFF")
+
+                # try:
+                #     asd = wait.until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/section/main/div/div/article/div/div[2]/div/div[2]/section[1]/span[1]/button"))).click()
+                #     print("DOne")
+                #     # sleep(2)
+                #     aassd = wait.until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[4]/div[2]/div/article/div[2]/section[3]/div/form/textarea"))).click()
+                #     print("Faild ffff")
+                #     asd = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "textarea.Ypffh")))
+                #     asd.click()
+                #
+                #     # WebDriverWait(driver, 10).until(EC.visibility_of_element_located(
+                #     #     (By.XPATH,
+                #     #      "/html/body/div[5]/div[2]/div/article/div/div[2]/div/div[2]/section[3]/div/form/textarea"))).click()
+                # except:
+                #     print("Faild 3")
+                #
+                # try:
+                #     comment_box = driver.find_element_by_class_name('Ypffh')
+                #     comment_box.click()
+                #
+                #
+                # except:
+                #     print("Failed ww")
+
+                # driver.quit()
+
+                #                 comment = WebDriverWait(driver, 5).until(EC.visibility_of_element_located(
+#                     (By.XPATH, '//*[@aria-label="Add a comment…"]')))
+#                 print('-----------------------------------CCC')
+#                 if comment.is_displayed():
+#                     comment.click()
                 if like == None:
                     pass
                 else:
@@ -514,7 +546,7 @@ def instabotcode(request):
         return render(request, 'accounts/report.html',
                       {'target': target, 'like_report': like_report, 'comment_report': comment_report,
                        'story_report': story_report, 'follow_report': follow_report})
-    except:
+    # except:
         #     # return HttpResponse("Network problem")
         return render(request, 'accounts/error_message.html')
 
@@ -579,7 +611,11 @@ def follow_func(wait, driver, follow_report):
 
 def like_func(wait, driver):
     # sleep(5)
-    like_button = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@aria-label="Like"]'))).click()
+    print('Pic HEre: ')
+
+    # like_button = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@aria-label="Like"]'))).click()
+    like_button = wait.until(EC.element_to_be_clickable((By.XPATH,
+                                           "/html/body/div[1]/section/main/div/div/article/div/div[2]/div/div[2]/section[1]/span[1]/button"))).click()
     # sleep(5)
     print('Pic Liked Successfully : ')
     # like_report += 1
@@ -617,8 +653,13 @@ def comment_func(wait, driver, comment_report):
 
     time.sleep(random.randint(1, 3))
     # sleep(3)
-    comment = WebDriverWait(driver, 5).until(EC.visibility_of_element_located(
-        (By.XPATH, '//*[@aria-label="Add a comment…"]')))
+    # comment = WebDriverWait(driver, 5).until(EC.visibility_of_element_located(
+    #     (By.XPATH, '//*[@aria-label="Add a comment…"]')))
+    # comment = wait.until(EC.element_to_be_clickable(
+    #     (By.XPATH, "/html/body/div[4]/div[2]/div/article/div[2]/section[3]/div/form/textarea"))).click()
+
+    comment = driver.find_element_by_class_name('Ypffh')
+
     print('-----------------------------------CCC')
     if comment.is_displayed():
         comment.click()
